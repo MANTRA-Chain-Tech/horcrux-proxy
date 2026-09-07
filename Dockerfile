@@ -25,7 +25,7 @@ RUN if [ "${TARGETARCH}" = "arm64" ] && [ "${BUILDARCH}" != "arm64" ]; then \
 RUN if [ -d "/go/bin/linux_${TARGETARCH}" ]; then mv /go/bin/linux_${TARGETARCH}/* /go/bin/; fi
 
 # Use minimal busybox from infra-toolkit image for final scratch image
-FROM ghcr.io/strangelove-ventures/infra-toolkit:v0.0.8 AS busybox-min
+FROM ghcr.io/amygdala-labs/infra-toolkit:v0.0.8 AS busybox-min
 RUN addgroup --gid 1000 -S strangelove && adduser --uid 100 -S strangelove -G strangelove
 
 # Use ln and rm from full featured busybox for assembling final image
@@ -34,7 +34,7 @@ FROM busybox:1.34.1-musl AS busybox-full
 # Build final image from scratch
 FROM scratch
 
-LABEL org.opencontainers.image.source="https://github.com/strangelove-ventures/horcrux-proxy"
+LABEL org.opencontainers.image.source="https://github.com/amygdala-labs/horcrux-proxy"
 
 WORKDIR /bin
 
